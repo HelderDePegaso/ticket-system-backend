@@ -8,7 +8,7 @@ import { UserArea } from '../../shared/model/user-area.model';
 import { UserCreationAttributes } from './model/user.model';
 
 import { Promotion } from '../../shared/model/promotion.model';
-import { omitFields } from 'src/common/utils/omitFields';
+import { omitFields } from 'src/utils/omitFields';
 import { UserAreaDto } from '../../shared/dtos/user-area-dto';
 
 @Controller('users')

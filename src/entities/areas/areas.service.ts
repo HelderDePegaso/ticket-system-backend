@@ -3,7 +3,7 @@ import { AreaDto } from './dto/area.dto';
 import { Area, AreaCreationAttributes } from './model/area.model'
 import { InjectModel } from '@nestjs/sequelize';
 
-import { omitFields } from 'src/common/utils/omitFields';
+import { omitFields } from 'src/utils/omitFields';
 
 import { v4 as uuidv4 } from 'uuid'
 

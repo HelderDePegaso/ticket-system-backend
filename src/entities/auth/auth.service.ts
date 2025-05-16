@@ -3,7 +3,7 @@ import { LoginDto } from './dto/LoginDto';
 import { UsersService } from '../users/users.service'; 
 import { UserDto, SafeUserDto } from '../users/dto/user.dto';
 import { User } from '../users/model/user.model';
-import { omitFields } from 'src/common/utils/omitFields';
+import { omitFields } from 'src/utils/omitFields';
 import { JWTStrategy } from './jwt.strategy';
 
 @Injectable()
