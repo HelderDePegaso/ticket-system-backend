@@ -17,13 +17,13 @@ import { AuthService } from './entities/auth/auth.service';
 
 // 🧩 MODELS
 import { User } from './entities/users/model/user.model';
-import { UserArea } from './entities/xtras/xtras-model/user-area.model';
+import { UserArea } from './entities/xtras/model/user-area.model';
 import { Area } from './entities/areas/model/area.model';
 
-import { Configuration } from './entities/xtras/xtras-model/configuration.model';
-import { Domain } from './entities/xtras/xtras-model/domain.model';
-import { Promotion } from './entities/xtras/xtras-model/promotion.model';
-import { Role } from './entities/xtras/xtras-model/role.model';
+import { Configuration } from './entities/xtras/model/configuration.model';
+import { Domain } from './entities/xtras/model/domain.model';
+import { Promotion } from './entities/xtras/model/promotion.model';
+import { Role } from './entities/xtras/model/role.model';
 
 import { AreasModule } from './entities/areas/areas.module';
 import { AreasController } from './entities/areas/areas.controller';

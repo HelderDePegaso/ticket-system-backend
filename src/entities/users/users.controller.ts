@@ -3,13 +3,13 @@ import { Request } from 'express';
 import { UsersService } from './users.service';
 import { UserDto as UserAttributes  } from './dto/user.dto';
 import { ROLE, ROLES , getRoleByName } from 'src/essentials/essentials';
-import { UserAreaService } from '../xtras/xtras-service/user-area/user-area.service';
-import { UserArea } from '../xtras/xtras-model/user-area.model';
+import { UserAreaService } from '../../shared/service/user-area/user-area.service';
+import { UserArea } from '../../shared/model/user-area.model';
 import { UserCreationAttributes } from './model/user.model';
 
-import { Promotion } from '../xtras/xtras-model/promotion.model';
+import { Promotion } from '../../shared/model/promotion.model';
 import { omitFields } from 'src/common/utils/omitFields';
-import { UserAreaDto } from '../xtras/xtras-dtos/user-area-dto';
+import { UserAreaDto } from '../../shared/dtos/user-area-dto';
 
 @Controller('users')
 export class UsersController {
@@ -31,7 +31,7 @@ export class UsersController {
 
     @Get(":id")
     get(@Param("id") param: Partial<UserAttributes>) {
-        // Pega o uuid da query  
+        
 
         const uuid: string | undefined = param.uuid;
 

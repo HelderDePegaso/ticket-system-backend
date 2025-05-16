@@ -2,7 +2,7 @@ import { Optional } from 'sequelize';
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from 'src/entities/users/model/user.model';
 
-import { ConfigurationAttributes } from '../xtras-dtos/configuration.dto';
+import { ConfigurationAttributes } from '../dtos/configuration.dto';
 
 
 type ConfigurationCreationAttributes = Optional<

@@ -9,12 +9,12 @@ import {
     CreatedAt,
     UpdatedAt,
   } from 'sequelize-typescript';
-  import { Role } from 'src/entities/xtras/xtras-model/role.model';
-  import { UserArea } from 'src/entities/xtras/xtras-model/user-area.model';
+  import { Role } from 'src/entities/xtras/model/role.model';
+  import { UserArea } from 'src/entities/xtras/model/user-area.model';
 
   import { Optional } from 'sequelize';
 
-  import { PromotionDto as PromotionAttributes } from '../xtras-dtos/promotion.dto';
+  import { PromotionDto as PromotionAttributes } from '../dtos/promotion.dto';
 
 export interface PromotionCreationAttributes
   extends Optional<

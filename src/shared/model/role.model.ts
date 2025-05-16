@@ -3,7 +3,7 @@ import { Promotion } from './promotion.model';
 
 
 
-import { RoleDto as RoleAttributes } from '../xtras-dtos/role.dto';
+import { RoleDto as RoleAttributes } from '../dtos/role.dto';
 import { Optional } from 'sequelize';
 
 interface RoleCreationAttributes

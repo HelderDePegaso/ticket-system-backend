@@ -10,12 +10,12 @@ import { UserDto  } from './dto/user.dto';
 
 import { UUIDV4 } from 'src/security/security'
 import { ROLE, ROLES } from 'src/essentials/essentials';
-import { Promotion } from 'src/entities/xtras/xtras-model/promotion.model';
+import { Promotion } from 'src/shared/model/promotion.model';
 import { Optional } from 'sequelize';
-import { UserArea } from '../xtras/xtras-model/user-area.model';
+import { UserArea } from '../../shared/model/user-area.model';
 
 import { criptography } from 'src/security/security'
-import { Role } from '../xtras/xtras-model/role.model';
+import { Role } from '../../shared/model/role.model';
 
 @Injectable()
 export class UsersService {

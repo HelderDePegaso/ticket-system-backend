@@ -14,8 +14,8 @@ import {
   } from 'sequelize-typescript';
   import { User } from '../../users/model/user.model';
   import { Area } from '../../areas/model/area.model';
-  import { Promotion } from '../../xtras/xtras-model/promotion.model';
-  import { UserAreaDto as UserAreaAttributes } from '../xtras-dtos/user-area-dto';
+  import { Promotion } from './promotion.model';
+  import { UserAreaDto as UserAreaAttributes } from '../dtos/user-area-dto';
 import { Optional } from 'sequelize';
   
 

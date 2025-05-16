@@ -14,8 +14,8 @@ import{
     HasMany,
     BeforeCreate,
   } from 'sequelize-typescript';
-  import { Configuration } from 'src/entities/xtras/xtras-model/configuration.model';
-  import { UserArea } from 'src/entities/xtras/xtras-model/user-area.model';
+  import { Configuration } from 'src/shared/model/configuration.model';
+  import { UserArea } from 'src/shared/model/user-area.model';
 
   import { UserDto as UserAttributes } from 'src/entities/users/dto/user.dto';
 
