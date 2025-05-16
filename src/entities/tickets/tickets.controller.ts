@@ -6,5 +6,5 @@ export class TicketsController {
     @Get(':id') 
     getTicket(@Param("uuid") uuid: string) {
         
-    }s;
+    }
 }
