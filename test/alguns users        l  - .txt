@@ -1,0 +1,47 @@
+{
+  name: 'João Silva',
+  logon: 'joaosilva',
+  password: 'senhaSuperSecreta123'
+}
+
+{
+  name: 'Marco Aurelio',
+  logon: 'marcoaurelio',
+  password: 'marcoaurelio'
+}
+
+{
+  "name": "Vaticano Italia",
+  "logon": "vaticanoitalia",
+  "password": "vaticanoitalia"
+}
+
+{
+   "id": 5,
+  "uuid": "c1b5c190-246b-463a-b1b6-bf283e676587",
+  "name": "Nopy Zh",
+  "logon": "nopyzh",
+  "password": "nopyzh"
+}
+
+{
+  "name": "Joaquim São Tomé",
+  "logon": "joaquimsaotome",
+  "password": "joaquimsaotome"
+}
+
+{
+  "status": "active",
+  "id": 6,
+  "name": "Joaquim São Tomé",
+  "logon": "joaquimsaotome",
+  "password": "1eda3dfa3fc43757933fe51501f99e2cb5a5da95b19a3e222b92c349d65be8b1",
+  "uuid": "dfbaf37e-cb29-4dce-971e-c0f419ad4df2",
+  "updated_at": "2025-04-28T08:32:01.906Z",
+  "created_at": "2025-04-28T08:32:01.906Z"
+}
+
+
+
+
+Vault do postman -  ff448de4cd4d5386e79e9f9db239eeddbcbc96098ab9d448c88d09818d10abee

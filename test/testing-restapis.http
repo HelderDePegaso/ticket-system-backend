@@ -1,0 +1,52 @@
+POST http://localhost:3000/auth/login HTTP/1.1
+content-type: application/json
+
+
+{
+    "logon": "admin",
+    "password": "123"
+}
+
+
+
+### Get all users
+GET http://localhost:3000/users/all
+Accept: application/json
+
+
+### Criar novo usuário 
+POST http://localhost:3000/users/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFpbiBBZG1pbiIsInN0YXR1cyI6ImFjdGl2ZSIsImNyZWF0ZWRfYXQiOiIyMDI1LTA0LTE2VDIwOjM1OjE1LjAwMFoiLCJ1cGRhdGVkX2F0IjoiMjAyNS0wNC0zMFQxMTowMDoxNS4wMDBaIiwidXVpZCI6IjFkZjYyOGJkLTkyYmMtNDJjYS1hZTcyLWJlZWNkOGQzYTAxNiIsImlhdCI6MTc0NjAxMjE3NCwiZXhwIjoxNzQ2MDE1Nzc0fQ.qQgvXGD1GXTwX0FOwkBW7l5BWa5wj9E9ZJafL2dMR0E
+
+
+{
+  "name": "Opine Macote",
+  "logon": "opinemacote",
+  "password": "opinemacote"
+}
+
+
+# Adicionar uma área nova
+#POST http://localhost:3000/areas/create 
+#Content-Type: application/json
+#
+#{
+#    "name": "RH",
+#    "status": "active",
+#}
+#
+#
+## Adicionar um usuário em uma área
+#POST http://localhost:3000/users/createss?role=1 # x
+#Content-Type: application/json
+#
+#{
+#  "userUUID": "3cb1d3ab-ee6a-4ad7-a910-a7445ab9809f",
+#  "logon": "marcoaurelio",
+#  "password": "marcoaurelio"
+#}
+#
+#
+#
+#
