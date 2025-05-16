@@ -17,18 +17,18 @@ import { AuthService } from './entities/auth/auth.service';
 
 // 🧩 MODELS
 import { User } from './entities/users/model/user.model';
-import { UserArea } from './entities/xtras/model/user-area.model';
+import { UserArea } from './shared/model/user-area.model';
 import { Area } from './entities/areas/model/area.model';
 
-import { Configuration } from './entities/xtras/model/configuration.model';
-import { Domain } from './entities/xtras/model/domain.model';
-import { Promotion } from './entities/xtras/model/promotion.model';
-import { Role } from './entities/xtras/model/role.model';
+import { Configuration } from './shared/model/configuration.model';
+import { Domain } from './shared/model/domain.model';
+import { Promotion } from './shared/model/promotion.model';
+import { Role } from './shared/model/role.model';
 
 import { AreasModule } from './entities/areas/areas.module';
 import { AreasController } from './entities/areas/areas.controller';
 import { AreasService } from './entities/areas/areas.service';
-import { UserAreaService } from './entities/xtras/xtras-service/user-area/user-area.service';
+import { UserAreaService } from './shared/service/user-area/user-area.service';
 import { JWTStrategy } from './entities/auth/jwt.strategy';
 import { AuthenticationTokenVerificationMiddleware as AtuthVerification } from './common/middleware/authentication.middleware';
 

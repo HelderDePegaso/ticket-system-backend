@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Area } from 'src/entities/areas/model/area.model';
 import { User } from 'src/entities/users/model/user.model'; 
-import { UserArea } from 'src/entities/xtras/model/user-area.model';
+import { UserArea } from 'src/shared/model/user-area.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { UsersService } from 'src/entities/users/users.service';
 import { AreasService } from 'src/entities/areas/areas.service';

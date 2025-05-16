@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Qu
 import { Request } from 'express'; 
 import { UsersService } from './users.service';
 import { UserDto as UserAttributes  } from './dto/user.dto';
-import { ROLE, ROLES , getRoleByName } from 'src/essentials/essentials';
+import { ROLE, ROLES , getRoleByName } from 'src/utils/role-logic';
 import { UserAreaService } from '../../shared/service/user-area/user-area.service';
 import { UserArea } from '../../shared/model/user-area.model';
 import { UserCreationAttributes } from './model/user.model';

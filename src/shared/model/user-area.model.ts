@@ -12,8 +12,8 @@ import {
     DataType,
     BeforeCreate,
   } from 'sequelize-typescript';
-  import { User } from '../../users/model/user.model';
-  import { Area } from '../../areas/model/area.model';
+  import { User } from 'src/entities/users/model/user.model';
+  import { Area } from 'src/entities/areas/model/area.model';
   import { Promotion } from './promotion.model';
   import { UserAreaDto as UserAreaAttributes } from '../dtos/user-area-dto';
 import { Optional } from 'sequelize';

@@ -9,7 +9,7 @@ import { User, UserCreationAttributes } from './model/user.model'
 import { UserDto  } from './dto/user.dto';
 
 import { UUIDV4 } from 'src/security/security'
-import { ROLE, ROLES } from 'src/essentials/essentials';
+import { ROLE, ROLES } from 'src/utils/util';
 import { Promotion } from 'src/shared/model/promotion.model';
 import { Optional } from 'sequelize';
 import { UserArea } from '../../shared/model/user-area.model';

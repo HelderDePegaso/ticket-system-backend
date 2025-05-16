@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query } from '@nestjs/common';
 import { AreaDto } from './dto/area.dto';
 import { AreasService } from './areas.service';
-import { omitFields } from 'src/utils/omitFields';
+import { omitFields } from 'src/utils/util';
 
 @Controller('areas')
 export class AreasController {
