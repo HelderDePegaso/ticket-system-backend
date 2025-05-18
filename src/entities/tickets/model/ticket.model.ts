@@ -8,6 +8,7 @@ import { Table , Column , Model , DataType , PrimaryKey,
     UpdatedAt,
     HasMany,
     BeforeCreate } from 'sequelize-typescript'
+import { User } from 'src/entities/users/model/user.model'
 
 
 
