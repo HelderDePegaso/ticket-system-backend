@@ -9,8 +9,8 @@ import {
     CreatedAt,
     UpdatedAt,
   } from 'sequelize-typescript';
-  import { Role } from 'src/entities/xtras/model/role.model';
-  import { UserArea } from 'src/entities/xtras/model/user-area.model';
+  import { Role } from 'src/shared/model/role.model';
+  import { UserArea } from 'src/shared/model/user-area.model';
 
   import { Optional } from 'sequelize';
 

@@ -16,8 +16,8 @@ import {
     HasMany,
     BeforeCreate,
   } from 'sequelize-typescript';
-  import { Domain } from 'src/entities/xtras/model/domain.model';
-  import { UserArea } from 'src/entities/xtras/model/user-area.model';
+  import { Domain } from 'src/shared/model/domain.model';
+  import { UserArea } from 'src/shared/model/user-area.model';
 
   import { Optional } from 'sequelize';
   import { AreaDto as AreaAttributes } from '../dto/area.dto';

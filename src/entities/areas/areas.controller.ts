@@ -23,7 +23,7 @@ export class AreasController {
         //const uuid: string | undefined = uuid;
         
         if (!uuid) {
-            throw new HttpException(`Area not provided`, HttpStatus.BAD_REQUEST);
+            throw new HttpException(`Area id not provided`, HttpStatus.BAD_REQUEST);
         }
 
         const area = await this.areasService.get({uuid})
