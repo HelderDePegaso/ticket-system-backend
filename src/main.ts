@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,7 @@ async function bootstrap() {
    const envVars = configService.get('DB_NAME'); // Pega todas as variáveis
    /*console.log(process.env); */ // Exibe as variáveis carregadas
 
+   app.useGlobalPipes(new ValidationPipe());
    
   await app.listen(process.env.PORT ?? 3000);
 }
