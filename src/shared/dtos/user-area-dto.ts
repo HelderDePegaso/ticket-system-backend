@@ -4,7 +4,7 @@
 
 
 import { Type } from 'class-transformer';
-import { IsInt, IsUUID, IsDateString, IsDate } from 'class-validator';
+import { IsInt, IsUUID, IsDateString, IsDate, IsString } from 'class-validator';
 
 export class UserAreaDto {
   @IsInt()
@@ -26,6 +26,18 @@ export class UserAreaDto {
   @Type(() => Date)
   @IsDate()
   updated_at: Date;
+}
+
+
+export class AddUserInAreaDto {
+  @IsUUID()
+  userUUID: string;
+
+  @IsUUID()
+  areaUUID: string;
+
+  @IsString()
+  role: string;
 }
 
 

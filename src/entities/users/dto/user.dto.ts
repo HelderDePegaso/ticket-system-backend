@@ -1,8 +1,10 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsString, IsUUID, IsIn, IsDateString, IsDate } from 'class-validator';
+import { IsInt, IsString, IsUUID, IsIn, IsDateString, IsDate, IsOptional } from 'class-validator';
+import { Is } from 'sequelize-typescript';
 
 export class UserDto {
   @IsInt()
+  @IsOptional()
   id: number;
 
   @IsString()
@@ -14,16 +16,20 @@ export class UserDto {
   @IsString()
   password: string;
 
+  @IsOptional()
   @IsUUID()
   uuid: string;
 
+  @IsOptional()
   @IsIn(['active', 'inactive'])
   status: 'active' | 'inactive';
 
-    @Type(() => Date)
+  @IsOptional()
+  @Type(() => Date)
   @IsDate()
   created_at: Date;
 
+  @IsOptional()
   @Type(() => Date)
   @IsDate()
   updated_at: Date;

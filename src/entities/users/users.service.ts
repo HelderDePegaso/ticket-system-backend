@@ -31,7 +31,7 @@ export class UsersService {
         return users.map((user) => user.toJSON() as UserDto);
       }
     
-      async create(data: UserCreationAttributes) {
+      async create(data: UserDto) {
 
         data.uuid = UUIDV4();
         
@@ -41,7 +41,9 @@ export class UsersService {
       }
 
       async delete(userData: Pick<UserDto, 'uuid'>) {
-        return await this.userModel.destroy({where: userData});
+        console.log("Deletando user");
+        console.log(userData)
+        return await this.userModel.destroy({where: {uuid: userData.uuid }});
       }
 
       async update(userData: Partial<UserDto>) {

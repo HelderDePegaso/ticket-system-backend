@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param, ParseIntPipe, ParseUUIDPipe } from '@nestjs/common';
 import { Request } from 'express'; 
 import { UsersService } from './users.service';
-import { UserDto as UserAttributes  } from './dto/user.dto';
+import { UserDto as UserAttributes, UserDto  } from './dto/user.dto';
 import { ROLE, ROLES , getRoleByName } from 'src/utils/role-logic';
 import { UserAreaService } from '../../shared/service/user-area/user-area.service';
 import { UserArea } from '../../shared/model/user-area.model';
@@ -9,7 +9,7 @@ import { User, UserCreationAttributes } from './model/user.model';
 
 import { Promotion } from '../../shared/model/promotion.model';
 import { omitFields } from 'src/utils/omitFields';
-import { UserAreaDto } from '../../shared/dtos/user-area-dto';
+import { AddUserInAreaDto, UserAreaDto } from '../../shared/dtos/user-area-dto';
 
 @Controller('users')
 export class UsersController {
@@ -48,10 +48,16 @@ export class UsersController {
     }
     
     @Post("create")
-    create(@Body() body: UserCreationAttributes  ) {
+    async create(@Body() body: UserDto  ) {
         console.log("O Boky -> ")
         console.log(body); 
-        return this.usersService.create(body);
+        const user: User | null = await this.usersService.create(body);
+
+        if(!user) {
+            throw new HttpException(`User not created`, HttpStatus.NOT_FOUND);
+        }
+        
+        return omitFields(user.dataValues, ["password", "id"]);
 
     }
 
@@ -65,8 +71,30 @@ export class UsersController {
         return this.usersService.delete(body);
     }
 
+    @Delete(":uuid")
+    async deleteWithUUID(@Param("uuid", ParseUUIDPipe) param: string) {
+        console.log("Param -> ")
+        console.log(param);
+        let userDto = new UserDto();
+        userDto.uuid = param
+        let rtn: number | null =  await this.usersService.delete(userDto);
+
+        
+        if (rtn == 0) {
+            throw new HttpException(`User not found`, HttpStatus.NOT_FOUND);
+        } else if (rtn == null) {
+            throw new HttpException(`There's a conflict`, HttpStatus.CONFLICT);
+        }
+        
+        return    {
+            status: 200,
+            message: `User ${param} deleted`
+        }    
+
+    }
+
     @Post("addInArea")
-    async addInArea(@Body() body: any) {
+    async addInArea(@Body() body: AddUserInAreaDto) {
         const userUUID = body.userUUID 
         const areaUUID = body.areaUUID
         const role = body.role
