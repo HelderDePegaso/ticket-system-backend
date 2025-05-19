@@ -9,7 +9,7 @@ import { User, UserCreationAttributes } from './model/user.model';
 
 import { Promotion } from '../../shared/model/promotion.model';
 import { omitFields } from 'src/utils/omitFields';
-import { AddUserInAreaDto, UserAreaDto } from '../../shared/dtos/user-area-dto';
+import { UserInAreaRepresentationDto, UserAreaDto } from '../../shared/dtos/user-area-dto';
 
 @Controller('users')
 export class UsersController {
@@ -94,7 +94,7 @@ export class UsersController {
     }
 
     @Post("addInArea")
-    async addInArea(@Body() body: AddUserInAreaDto) {
+    async addInArea(@Body() body: UserInAreaRepresentationDto) {
         const userUUID = body.userUUID 
         const areaUUID = body.areaUUID
         const role = body.role
@@ -131,7 +131,7 @@ export class UsersController {
     }
 
     @Delete("removeFromArea")
-    async removeFromArea(@Body() body: any) {
+    async removeFromArea(@Body() body: UserInAreaRepresentationDto) {
         const userUUID = body.userUUID
         const areaUUID = body.areaUUID
 

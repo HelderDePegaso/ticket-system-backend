@@ -4,7 +4,7 @@
 
 
 import { Type } from 'class-transformer';
-import { IsInt, IsUUID, IsDateString, IsDate, IsString } from 'class-validator';
+import { IsInt, IsUUID, IsDateString, IsDate, IsString, IsOptional } from 'class-validator';
 
 export class UserAreaDto {
   @IsInt()
@@ -29,7 +29,7 @@ export class UserAreaDto {
 }
 
 
-export class AddUserInAreaDto {
+export class UserInAreaRepresentationDto {
   @IsUUID()
   userUUID: string;
 
@@ -37,6 +37,7 @@ export class AddUserInAreaDto {
   areaUUID: string;
 
   @IsString()
+  @IsOptional()
   role: string;
 }
 
