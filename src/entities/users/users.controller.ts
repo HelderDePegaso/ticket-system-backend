@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param, ParseIntPipe, ParseUUIDPipe } from '@nestjs/common';
 import { Request } from 'express'; 
 import { UsersService } from './users.service';
 import { UserDto as UserAttributes  } from './dto/user.dto';
 import { ROLE, ROLES , getRoleByName } from 'src/utils/role-logic';
 import { UserAreaService } from '../../shared/service/user-area/user-area.service';
 import { UserArea } from '../../shared/model/user-area.model';
-import { UserCreationAttributes } from './model/user.model';
+import { User, UserCreationAttributes } from './model/user.model';
 
 import { Promotion } from '../../shared/model/promotion.model';
 import { omitFields } from 'src/utils/omitFields';
@@ -29,17 +29,22 @@ export class UsersController {
         return this.usersService.findAll();
     }
 
-    @Get(":id")
-    get(@Param("id") param: Partial<UserAttributes>) {
+    @Get(":uuid")
+    async get(@Param("uuid", ParseUUIDPipe) param: Partial<UserAttributes>) {
         
-
-        const uuid: string | undefined = param.uuid;
-
+        const uuid: any = (param as string ) ; 
+        
         if (!uuid) {
-            throw new HttpException(`User not provided`, HttpStatus.NOT_FOUND);
+            throw new HttpException(`User uuid not provided`, HttpStatus.NOT_FOUND);
         }
 
-        return this.usersService.get({uuid: uuid});
+        const user:User | null = await this.usersService.get({uuid: uuid}); 
+
+        if (!user) {
+            throw new HttpException(`User ${uuid} not found`, HttpStatus.NOT_FOUND);
+        }
+        
+        return omitFields(user.dataValues, ["password", "id"]);
     }
     
     @Post("create")

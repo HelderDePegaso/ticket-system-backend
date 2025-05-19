@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {  IsString, IsNotEmpty , IsNumber , IsUUID , IsOptional, IsDate  , IsDateString} from 'class-validator';
-import { Is } from 'sequelize-typescript';
+import { Is, IsIn } from 'sequelize-typescript';
 
 
 export class AreaDto {
@@ -12,9 +12,9 @@ export class AreaDto {
     @IsNotEmpty()
     name: string;
 
-    @IsNumber()
-    @IsNotEmpty()
+    @IsString()
     status: 'active' | 'inactive';
+    
 
     @IsNumber()
     @IsNotEmpty()

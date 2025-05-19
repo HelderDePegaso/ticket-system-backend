@@ -27,6 +27,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFpbiBBZ
 }
 
 
+## Get user by its uuid
+GET http://localhost:3000/users/dfbaf37e-cb29-4dce-971e-c0f419ad4df2
+Content-Type: application/json
+
+
 # Adicionar uma área nova
 #POST http://localhost:3000/areas/create 
 #Content-Type: application/json

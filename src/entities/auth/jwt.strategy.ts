@@ -16,6 +16,7 @@ export class JWTStrategy {
     constructor() {
         this.jwt_secret = process.env.JWT_SECRET || 'w';
         this.time = process.env.JWT_EXPIRES_IN as StringValue || '3600s' as StringValue; 
+        console.log(`The time is ${this.time}`)
         this.option = { expiresIn: this.time } as jwt.SignOptions
     }
 
