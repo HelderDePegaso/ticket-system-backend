@@ -31,6 +31,9 @@ import { AreasService } from './entities/areas/areas.service';
 import { UserAreaService } from './shared/service/user-area/user-area.service';
 import { JWTStrategy } from './entities/auth/jwt.strategy';
 import { AuthenticationTokenVerificationMiddleware as AtuthVerification } from './common/middleware/authentication.middleware';
+import { PromotionService } from './shared/service/promotion/promotion.service';
+import { AssistentService } from './shared/service/assistent/assistent.service';
+
 
 
 
@@ -86,7 +89,11 @@ import { AuthenticationTokenVerificationMiddleware as AtuthVerification } from '
     
     UserAreaService,
 
-    JWTStrategy
+    JWTStrategy,
+
+    PromotionService,
+
+    AssistentService
   ],
 })
 export class AppModule implements NestModule {

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param, ParseIntPipe, ParseUUIDPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param, ParseIntPipe, ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { Request } from 'express'; 
 import { UsersService } from './users.service';
 import { UserDto as UserAttributes, UserDto  } from './dto/user.dto';
@@ -11,6 +11,11 @@ import { Promotion } from '../../shared/model/promotion.model';
 import { omitFields } from 'src/utils/omitFields';
 import { UserInAreaRepresentationDto, UserAreaDto } from '../../shared/dtos/user-area-dto';
 
+
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesDecorator } from 'src/common/decorators/roles.decorator';
+
+@UseGuards(RolesGuard)
 @Controller('users')
 export class UsersController {
 
@@ -47,6 +52,7 @@ export class UsersController {
         return omitFields(user.dataValues, ["password", "id"]);
     }
     
+    @RolesDecorator([ROLES.ADMIN, ROLES.TECNITION])
     @Post("create")
     async create(@Body() body: UserDto  ) {
         console.log("O Boky -> ")

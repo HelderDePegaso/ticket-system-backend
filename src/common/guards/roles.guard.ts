@@ -5,10 +5,12 @@ import { RolesDecorator } from 'src/common/decorators/roles.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private reflector: Reflector) {}
+  constructor(private reflector: Reflector) {} 
 
   canActivate(context: ExecutionContext): boolean {
+    console.log("RolesGuard")
     const roles = this.reflector.get(RolesDecorator, context.getHandler());
+    console.log(roles)
     if (!roles) {
       return true;
     }

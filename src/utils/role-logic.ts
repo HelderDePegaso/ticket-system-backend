@@ -4,15 +4,16 @@ export interface ROLE  {
     name: string
 }
 
+
 export const ROLES = {
-    1: "admin",
-    2: "requester",
-    3: "responsable",
-    4: "requester_tecnition",
-    5: "responsable_all",
-    6: "responsable_tecnition",
-    7: "responsable_requester",
-    8: "tecnition"
+    ADMIN: "admin",
+    REQUESTER: "requester",
+    RESPONSABLE: "responsable",
+    REQUESTER_TECNITION: "requester_tecnition",
+    RESPONSABLE_ALL: "responsable_all",
+    RESPONSABLE_TECNITION: "responsable_tecnition",
+    RESPONSABLE_REQUESTER: "responsable_requester",
+    TECNITION: "tecnition"
 }
 
 export function getRoleByNumber(role: number) { 

@@ -16,14 +16,20 @@ import { UserArea } from '../../shared/model/user-area.model';
 
 import { criptography } from 'src/security/security'
 import { Role } from '../../shared/model/role.model';
+import { Configuration } from 'src/shared/model/configuration.model';
+import { AssistentService } from 'src/shared/service/assistent/assistent.service';
 
 @Injectable()
 export class UsersService {
     
+  private configModel: typeof Configuration = Configuration
+  private assistentService: AssistentService = new AssistentService()
 
     constructor(
         @InjectModel(User)
-        private userModel: typeof User,
+        private userModel: typeof User, 
+        
+        
       ) {}
     
       async findAll() {
@@ -70,8 +76,12 @@ export class UsersService {
         const user = await this.get(loginFields)
         //console.log(user)
         if (user) {
+            let roles: any = await this.getUserRoles(user.id);
             console.log("User found");
             //console.log(user);
+
+            user.dataValues["roles"] = roles
+
             return user;
         } else {
             console.log("User not found");
@@ -79,6 +89,34 @@ export class UsersService {
         }
         
     }
+  async getUserRoles(id: number) {
+    let roles  :      string[]  = []
+    const isAdmin = await this.isAdmin(id);
+
+    if (isAdmin) {
+      roles.push(ROLES.ADMIN)
+    }
+
+    const promotions = await this.assistentService.getAllPromotionsOfAnUser(id)
+    console.log(promotions)
+
+    if (promotions) {
+      promotions.forEach(promotion => {
+        const role = promotion.dataValues["role"]
+        roles.push(role.dataValues.name)
+      })
+    }
+    return roles
+  }
+  async isAdmin(id: number) {
+    const admin = await  this.configModel.findOne({where: {main_admin: id}})
+
+    if (admin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
     async get(data: Partial<UserDto>) {
       return await this.userModel.findOne({where: data});

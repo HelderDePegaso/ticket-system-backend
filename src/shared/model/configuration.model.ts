@@ -1,5 +1,5 @@
 import { Optional } from 'sequelize';
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, ForeignKey, BelongsTo, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 import { User } from 'src/entities/users/model/user.model';
 
 import { ConfigurationAttributes } from '../dtos/configuration.dto';
@@ -36,4 +36,12 @@ export class Configuration extends Model<Configuration, ConfigurationCreationAtt
 
   @BelongsTo(() => User, 'main_admin')
   main_admin_user!: User;
+
+  @Column(DataType.DATE)
+  @CreatedAt
+  declare created_at: Date;
+
+  @Column(DataType.DATE)
+  @UpdatedAt
+  declare updated_at: Date;
 }
