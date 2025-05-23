@@ -16,10 +16,11 @@ export class AreaDto {
     status: 'active' | 'inactive';
     
 
+    @IsOptional()
     @IsNumber()
-    @IsNotEmpty()
     domain_id: number;
 
+    @IsOptional()
     @IsUUID()
     uuid: string; 
 

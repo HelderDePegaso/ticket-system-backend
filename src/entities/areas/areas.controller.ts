@@ -19,7 +19,7 @@ export class AreasController {
 
     @Get(":id")
     async getAnArea(@Param("id") uuid: string) {
-        
+        console.log("Começar a buscar area")    
         //const uuid: string | undefined = uuid;
         
         if (!uuid) {
@@ -28,8 +28,13 @@ export class AreasController {
 
         const area = await this.areasService.get({uuid})
 
+        
         if (!area) return new HttpException(`Area ${uuid} not found`, HttpStatus.NOT_FOUND)
 
-        return area
+        let safeArea = omitFields(area.dataValues, ["id", "domain_id", "super_area"])
+
+        
+
+        return safeArea
     }
 }
