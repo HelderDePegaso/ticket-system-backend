@@ -15,6 +15,14 @@ async function bootstrap() {
    /*console.log(process.env); */ // Exibe as variáveis carregadas
 
    app.useGlobalPipes(new ValidationPipe());
+
+   // Enable CORS for all routes 
+   app.enableCors({
+     origin: '*',
+     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+     allowedHeaders: 'Content-Type, Accept, Authorization',
+     credentials: true
+   })
    
   await app.listen(process.env.PORT ?? 3000);
 }

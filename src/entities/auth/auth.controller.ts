@@ -19,7 +19,11 @@ export class AuthController {
         if (!userOrNull) {
             return new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
-        return userOrNull
+        return {
+            status: 200, 
+            message: "Login efetuado com sucesso", 
+            data: {token :  userOrNull }
+        }
 
     }
 
