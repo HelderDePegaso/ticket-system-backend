@@ -33,6 +33,7 @@ import { JWTStrategy } from './entities/auth/jwt.strategy';
 import { AuthenticationTokenVerificationMiddleware as AtuthVerification } from './common/middleware/authentication.middleware';
 import { PromotionService } from './shared/service/promotion/promotion.service';
 import { AssistentService } from './shared/service/assistent/assistent.service';
+import { Ticket } from './entities/tickets/model/ticket.model';
 
 
 
@@ -68,6 +69,7 @@ import { AssistentService } from './shared/service/assistent/assistent.service';
         Domain,
         Promotion,
         Role,
+        Ticket
       ],
     }),
     
@@ -80,8 +82,9 @@ import { AssistentService } from './shared/service/assistent/assistent.service';
     AreasController,
   ],
   providers: [
+    TicketsService, 
     AppService,
-    TicketsService,
+    
     
     AuthService,
     
@@ -93,7 +96,9 @@ import { AssistentService } from './shared/service/assistent/assistent.service';
 
     PromotionService,
 
-    AssistentService
+    AssistentService , 
+
+    
   ],
 })
 export class AppModule implements NestModule {
