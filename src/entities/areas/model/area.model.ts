@@ -36,8 +36,12 @@ import { v4 as uuidv4 } from 'uuid';
     declare id: number;
   
     @AllowNull(false)
-    @Column(DataType.STRING(20))
+    @Column(DataType.STRING(30))
     declare name: string;
+
+    @AllowNull(false)
+    @Column(DataType.STRING(9))
+    abbrev: string;
   
     @ForeignKey(() => Domain)
     @AllowNull(false)

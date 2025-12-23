@@ -121,5 +121,13 @@ export class UsersService {
     async get(data: Partial<UserDto>) {
       return await this.userModel.findOne({where: data});
     }
+    
+    
+    
+
+    async getUserId(uuid: string) {
+      const user = await this.get({uuid});
+      return user?.id;
+    }
 
 }

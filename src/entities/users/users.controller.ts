@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param, ParseIntPipe, ParseUUIDPipe, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, Param, ParseIntPipe, ParseUUIDPipe, UseGuards, Req } from '@nestjs/common';
 import { Request } from 'express'; 
 import { UsersService } from './users.service';
 import { UserDto as UserAttributes, UserDto  } from './dto/user.dto';
@@ -14,6 +14,9 @@ import { UserInAreaRepresentationDto, UserAreaDto } from '../../shared/dtos/user
 
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { RolesDecorator } from 'src/common/decorators/roles.decorator';
+import { AreasService } from '../areas/areas.service';
+import { Area } from '../areas/model/area.model';
+import { changeFieldName } from 'src/utils/util';
 
 @UseGuards(RolesGuard)
 @Controller('users')
@@ -22,16 +25,50 @@ export class UsersController {
     
 
     
-    constructor(private usersService: UsersService, private userAreaService: UserAreaService) {}
+    constructor(private usersService: UsersService, private userAreaService: UserAreaService , private areaService: AreasService) {}
 
     @Get("mydata")
-    getLoadedUserData(req: Request) {
-        return this.usersService.get({uuid: ( req as any )?.appExtended.user.uuid});
+    async getLoadedUserData(@Req()  req: Request) { 
+        console.log("Reading user data")
+        const myData = await this.usersService.get({uuid: ( req as any )?.user.uuid});
+
+        if (!myData) return new HttpException(`User data not found`, HttpStatus.NOT_FOUND);
+
+        return  changeFieldName(omitFields(myData.dataValues , ["password", "id"]) , "logon", "email")
     }
 
     @Get("all")
     getAllUsers() {
         return this.usersService.findAll();
+    }
+
+    @Get("my-areas")
+    async getMyAreas(@Req() req : any) {
+        console.log("Começar a buscar area")
+        console.log(req.user)
+        const userId  = await this.usersService.getUserId(req.user.uuid);
+        if (!userId) return new HttpException(`User id not found`, HttpStatus.NOT_FOUND);
+
+        const allUserAreas =  await this.userAreaService.getAllUserAreas(userId);
+        
+        console.log(allUserAreas);
+        const mapped = await mappedReturn(allUserAreas)
+
+        return mapped
+
+        async function mappedReturn(allUserAreas: any[]) {
+            return allUserAreas.map(ua => {
+                const area = (ua.dataValues as any).area;
+                const promotions = (ua.dataValues as any).promotions
+                const role =( promotions[0].dataValues  as any).role
+                
+                return Object.assign(
+                    {} , 
+                    area.dataValues , 
+                    {function: role.dataValues.name} , 
+                    {valid_until: promotions[0].dataValues.valid_until })
+            })//.filter(Boolean)
+        }
     }
 
     @Get(":uuid")
@@ -157,4 +194,6 @@ export class UsersController {
         }
         
     }
+
+    
 }

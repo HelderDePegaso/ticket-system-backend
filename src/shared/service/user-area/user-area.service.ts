@@ -8,6 +8,8 @@ import { AreasService } from 'src/entities/areas/areas.service';
 
 
 import { v4 as uuidv4 } from 'uuid';
+import { Promotion } from 'src/shared/model/promotion.model';
+import { Role } from 'src/shared/model/role.model';
 
 @Injectable() 
 export class UserAreaService {
@@ -63,5 +65,32 @@ export class UserAreaService {
     async get(where: Partial<UserArea>) {   
         console.log(this.userArea)
         return await UserArea.findOne({where})
+    }
+
+    async getAllUserAreas(userId: number) {
+        return await UserArea.findAll({
+            attributes: ['uuid'] ,
+            where    :   {
+                user_id: userId
+            } , 
+
+            include: [
+                {
+                    model: Area,
+                    attributes: ["uuid" , "name" , "abbrev" ,  "status" , "domain_id"]
+                }, 
+
+                {
+                    model: Promotion,
+                    attributes: ["role_id", "valid_until"],
+                    include: [
+                        {
+                            model: Role,
+                            attributes: ["name"]
+                        }
+                    ]
+                }
+            ]
+        })
     }
 }

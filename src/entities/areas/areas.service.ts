@@ -27,6 +27,9 @@ export class AreasService {
     }
 
     async get(where: Partial<AreaDto>) {
-       return await this.areaModel.findOne({where})
+       const r =  await this.areaModel.findOne({where})
+       console.log("Areas found")
+       console.log(r)
+       return r
     }
 }

@@ -1,12 +1,13 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query, Req } from '@nestjs/common';
 import { AreaDto } from './dto/area.dto';
 import { AreasService } from './areas.service';
 import { omitFields } from 'src/utils/util';
+import { UserAreaService } from 'src/shared/service/user-area/user-area.service';
 
 @Controller('areas')
 export class AreasController {
 
-    constructor(@Inject(AreasService) private areasService: AreasService) {
+    constructor(@Inject(AreasService) private areasService: AreasService , private userAreaService: UserAreaService) {
         
     }
 
@@ -37,4 +38,6 @@ export class AreasController {
 
         return safeArea
     }
+
+    
 }
