@@ -10,12 +10,12 @@ export class AuthController {
     }
     
     @Post('login')
-    login(@Body()credentials: LoginDto) {
-        const userOrNull =  this.authService.login(credentials);
+    async login(@Body()credentials: LoginDto) {
+        const userOrNull =  await this.authService.login(credentials);
         
 
         console.log("userOrNull")
-
+        console.log(userOrNull)
         if (!userOrNull) {
             return new HttpException('User not found', HttpStatus.NOT_FOUND);
         }

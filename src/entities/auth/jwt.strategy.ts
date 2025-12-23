@@ -20,7 +20,7 @@ export class JWTStrategy {
         this.option = { expiresIn: this.time } as jwt.SignOptions
     }
 
-    generateToken (value: object) {
+    async generateToken (value: object) {
         return jwt.sign(value, this.jwt_secret, this.option);
 
     } 

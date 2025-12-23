@@ -24,7 +24,7 @@ export class AuthService {
 
             console.log("safeUser");
             //console.log(safeUser);
-            return this.jwtStrategy.generateToken(safeUser)
+            return await this.jwtStrategy.generateToken(safeUser)
     
         } else {
             return null
