@@ -32,4 +32,11 @@ export class AreasService {
        console.log(r)
        return r
     }
+
+
+    async getAreaId(uuid: string) {
+        const area  =  await this.get({uuid})
+
+        return area?.id
+    }
 }
