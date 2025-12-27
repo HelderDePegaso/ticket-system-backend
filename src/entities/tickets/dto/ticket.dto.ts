@@ -31,6 +31,10 @@ export class TicketDto {
   area_id: number;
 
   @IsString()
+  title: string;
+
+  
+  @IsString()
   description: string;
 
   @IsOptional()

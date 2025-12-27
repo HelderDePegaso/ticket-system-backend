@@ -12,6 +12,7 @@ import {
   CreatedAt,
   UpdatedAt,
   BeforeCreate,
+  BeforeValidate,
 } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -19,8 +20,21 @@ import { User } from 'src/entities/users/model/user.model';
 import { Area } from 'src/entities/areas/model/area.model';
 import { Optional } from 'sequelize';
 
-import { TicketDto as TicketAttributes } from '../dto/ticket.dto';
+//import { TicketDto as TicketAttributes } from '../dto/ticket.dto';
 
+export interface TicketAttributes {
+  id: number;
+  uuid: string;
+  requester_id: number;
+  technician_id?: number;
+  area_id: number;
+  title: string;
+  description: string;
+  attachments?: any;
+  status: 'open' | 'closed' | 'in_progress' | 'pending' | 'escalated' | 'cancelled' | 'seen' | 'resolved';
+  created_at: Date;
+  updated_at: Date;
+}
 
 export type TicketCreationAttributes = Optional<
   TicketAttributes, 'id' | 'uuid' | 'status' | 'created_at' | 'updated_at'>;
@@ -55,6 +69,10 @@ export class Ticket extends Model<TicketAttributes, TicketCreationAttributes> {
   @AllowNull(false)
   @Column(DataType.INTEGER)
   area_id: number;
+
+  @AllowNull(false)
+  @Column(DataType.STRING(30))
+  title: string;
 
   @AllowNull(false)
   @Column(DataType.TEXT)
@@ -96,8 +114,8 @@ export class Ticket extends Model<TicketAttributes, TicketCreationAttributes> {
   @BelongsTo(() => Area, 'area_id')
   area: Area;
 
-  @BeforeCreate
-  static generateUuid(instance: Ticket) {
-    instance.uuid = uuidv4();
-  }
+  //@BeforeValidate
+  //static generateUuid(instance: Ticket) {
+  //  instance.uuid = uuidv4();
+  //}
 }
