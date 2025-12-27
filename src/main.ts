@@ -14,7 +14,10 @@ async function bootstrap() {
    const envVars = configService.get('DB_NAME'); // Pega todas as variáveis
    /*console.log(process.env); */ // Exibe as variáveis carregadas
 
-   app.useGlobalPipes(new ValidationPipe());
+   app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // Ignora todos os campos a mais (no  body/dto ) que não esteja registado no dto (eliminando-os)
+    forbidNonWhitelisted: true // Reclama se haver campos    a mais (no  body/dto ) que não esteja registado no dto
+   }));
 
    // Enable CORS for all routes 
    app.enableCors({

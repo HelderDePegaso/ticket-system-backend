@@ -33,22 +33,17 @@ import { JWTStrategy } from './entities/auth/jwt.strategy';
 import { AuthenticationTokenVerificationMiddleware as AtuthVerification } from './common/middleware/authentication.middleware';
 import { PromotionService } from './shared/service/promotion/promotion.service';
 import { AssistentService } from './shared/service/assistent/assistent.service';
-import { Ticket } from './entities/tickets/model/ticket.model';
+import { Ticket } from 'src/entities/tickets/model/ticket.model';
 
 
 
 
 @Module({
   imports: [
-    TicketsModule,
-    UsersModule,
-    AuthModule,
-    AreasModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env', `.env.${process.env.NODE_ENV || 'development'}`],
     }),
-
     SequelizeModule.forRoot({
       dialect: 'mysql', 
       host: 'localhost',
@@ -72,6 +67,15 @@ import { Ticket } from './entities/tickets/model/ticket.model';
         Ticket
       ],
     }),
+
+    UsersModule,
+    TicketsModule,
+    
+    AuthModule,
+    AreasModule,
+    
+
+    
     
   ],
   controllers: [
@@ -81,9 +85,9 @@ import { Ticket } from './entities/tickets/model/ticket.model';
     AuthController,
     AreasController,
   ],
-  providers: [
+  providers: [AppService,
     TicketsService, 
-    AppService,
+    
     
     
     AuthService,
@@ -100,6 +104,8 @@ import { Ticket } from './entities/tickets/model/ticket.model';
 
     
   ],
+
+  exports: [TicketsService]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
