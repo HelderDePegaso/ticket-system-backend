@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post, Query, Req } from '@nestjs/common';
 import { TicketDto } from './dto/ticket.dto';
 import { TicketsService } from './tickets.service';
 import { omitFields } from 'src/utils/util';
@@ -6,12 +6,42 @@ import { Ticket } from './model/ticket.model';
 import { TicketSimpleDto } from './dto/ticket.simple.dto';
 import { UsersService } from '../users/users.service';
 import { AreasService } from '../areas/areas.service';
+import { LastModifiedHttpParam } from 'src/common/type/last-modified.http.param';
 
 @Controller('tickets')
 export class TicketsController {
 
     constructor( private ticketService: TicketsService , private userService: UsersService , private areaService: AreasService) {
 
+    }
+
+
+    @Get('user_tickets')
+    async getAllTickets(@Req() req: any, @Query() lastModified : LastModifiedHttpParam) {
+        const requester_uuid: string | undefined = req.user.uuid;
+        if (!requester_uuid) throw new HttpException(`User uuid not found. Try logging again`, HttpStatus.INTERNAL_SERVER_ERROR);
+        const requester_id: number | undefined = await this.userService.getUserId(requester_uuid);
+        if (!requester_id) throw new HttpException(`User id not found`, HttpStatus.INTERNAL_SERVER_ERROR);
+        console.log("Requester id -> " + requester_id);
+        return {
+            statusCode: 200,
+            message: "Tickets found",
+            data:  await this.ticketService.getUserTickets(requester_id)
+        }
+    }
+
+    @Get('user_area_tickets')
+    async getUserAreaTickets() {
+        return await this.ticketService.getUserAreaTickets()
+    }
+
+    @Get('area_tickets')
+    async getAreaTickets(@Req() req: any) {
+        const requester_uuid: string | undefined = req.user.uuid;
+        if (!requester_uuid) throw new HttpException(`User uuid not found. Try logging again`, HttpStatus.INTERNAL_SERVER_ERROR);
+        const requester_id: number | undefined = await this.userService.getUserId(requester_uuid);
+        if (!requester_id) throw new HttpException(`User id not found`, HttpStatus.INTERNAL_SERVER_ERROR);
+        return await this.ticketService.getAreaTickets(requester_id)
     }
     
     @Get(':id') 

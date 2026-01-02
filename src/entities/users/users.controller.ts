@@ -17,6 +17,10 @@ import { RolesDecorator } from 'src/common/decorators/roles.decorator';
 import { AreasService } from '../areas/areas.service';
 import { Area } from '../areas/model/area.model';
 import { changeFieldName } from 'src/utils/util';
+import { MyAreaDto } from './dto/my-area.dto';
+import { last } from 'rxjs';
+import { LastModifiedHttpParam } from 'src/common/type/last-modified.http.param';
+import { AppResponseObject } from 'src/common/type/app-response-object';
 
 @UseGuards(RolesGuard)
 @Controller('users')
@@ -56,7 +60,7 @@ export class UsersController {
 
         return mapped
 
-        async function mappedReturn(allUserAreas: any[]) {
+        async function mappedReturn(allUserAreas: any[]) : Promise<MyAreaDto[]> {
             return allUserAreas.map(ua => {
                 const area = (ua.dataValues as any).area;
                 const promotions = (ua.dataValues as any).promotions
@@ -67,6 +71,37 @@ export class UsersController {
                     area.dataValues , 
                     {function: role.dataValues.name} , 
                     {valid_until: promotions[0].dataValues.valid_until })
+            })//.filter(Boolean)
+        }
+    }
+
+
+    @Get("areas")
+    async getMyAreasMock(@Req() req : any  , @Query() lastModified : LastModifiedHttpParam) {
+        debugger
+        console.log("Começar a buscar area")
+        console.log(req.user)
+        const userId  = await this.usersService.getUserId(req.user.uuid);
+        if (!userId) return new HttpException(`User id not found`, HttpStatus.NOT_FOUND);
+
+        const allUserAreas =  await this.userAreaService.getAllUserAreas(userId, lastModified.lastModified);
+        
+        console.log(allUserAreas);
+        const mapped = await mappedReturn(allUserAreas)
+
+        return {statusCode: 200 , data: {areas: mapped}, message: "OK"} as AppResponseObject<MyAreaDto[]>
+
+        async function mappedReturn(allUserAreas: any[]) : Promise<MyAreaDto[]> {
+            return allUserAreas.map(ua => {
+                const area = (ua.dataValues as any).area;
+                const promotions = (ua.dataValues as any).promotions
+                const role = (promotions.length == 0) ? null : ( promotions[0].dataValues  as any).role
+                
+                return Object.assign(
+                    {} , 
+                    area.dataValues , 
+                    {function: (role) ? role.dataValues.name : "N/A"} , 
+                    {valid_until: (promotions.length > 0) ? promotions[0].dataValues.valid_until : "N/A" })
             })//.filter(Boolean)
         }
     }

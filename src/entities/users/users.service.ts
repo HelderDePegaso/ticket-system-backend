@@ -18,6 +18,7 @@ import { criptography } from 'src/security/security'
 import { Role } from '../../shared/model/role.model';
 import { Configuration } from 'src/shared/model/configuration.model';
 import { AssistentService } from 'src/shared/service/assistent/assistent.service';
+import { Ticket } from '../tickets/model/ticket.model';
 
 @Injectable()
 export class UsersService {
