@@ -11,18 +11,18 @@ export class AuthController {
     
     @Post('login')
     async login(@Body()credentials: LoginDto) {
-        const userOrNull =  await this.authService.login(credentials);
+        const loginResult: any =  await this.authService.login(credentials);
         
 
         console.log("userOrNull")
-        console.log(userOrNull)
-        if (!userOrNull) {
+        console.log(loginResult)
+        if (!loginResult) {
             return new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
         return {
             status: 200, 
             message: "Login efetuado com sucesso", 
-            data: {token :  userOrNull }
+            data: {token :  loginResult.token, userData: loginResult.user}
         }
 
     }

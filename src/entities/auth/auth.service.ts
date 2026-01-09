@@ -21,10 +21,10 @@ export class AuthService {
             console.log("User found");
             //console.log(user);
             let safeUser = this.toSafeUser(user);
-
+            const token = await this.jwtStrategy.generateToken(safeUser);
             console.log("safeUser");
             //console.log(safeUser);
-            return await this.jwtStrategy.generateToken(safeUser)
+            return {token: token, user: safeUser}
     
         } else {
             return null
